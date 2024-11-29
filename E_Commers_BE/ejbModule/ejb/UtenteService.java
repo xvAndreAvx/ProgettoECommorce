@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import entity.Utente;
 
@@ -13,42 +15,40 @@ import entity.Utente;
 @Stateless
 @LocalBean
 public class UtenteService implements UtenteServiceRemote {
+    
+    @PersistenceContext(unitName = "MySqlDS") 
+    private EntityManager entityManager;
 
     /**
      * Default constructor. 
      */
     public UtenteService() {
-        // TODO Auto-generated constructor stub
     }
 
-	@Override
-	public void insert(Utente u) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void insert(Utente u) {
+        entityManager.persist(u);
+    }
 
-	@Override
-	public Utente update(Utente u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Utente update(Utente u) {
+        return entityManager.merge(u);
+    }
 
-	@Override
-	public void delete(Utente u) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void delete(Utente u) {
+        u = entityManager.merge(u);
+        entityManager.remove(u);
+    }
 
-	@Override
-	public List<Utente> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Utente> findAll() {
+        return entityManager.createQuery("SELECT u FROM Utente u", Utente.class).getResultList();
+    }
 
-	@Override
-	public Utente findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Utente findById(Long id) {
+        return entityManager.find(Utente.class, id);
+    }
 
 }
