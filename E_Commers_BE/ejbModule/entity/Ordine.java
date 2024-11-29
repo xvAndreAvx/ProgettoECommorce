@@ -78,9 +78,5 @@ public class Ordine implements Serializable {
         this.totaleDaPagare = totaleDaPagare;
     }
     
-    
-    private void Syso() {
-		// TODO Auto-generated method stub
-
-	}
+  
 }
