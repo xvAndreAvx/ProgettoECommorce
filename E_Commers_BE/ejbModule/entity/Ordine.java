@@ -1,8 +1,9 @@
 package entity;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ordine")
@@ -76,4 +77,10 @@ public class Ordine implements Serializable {
     public void setTotaleDaPagare(Double totaleDaPagare) {
         this.totaleDaPagare = totaleDaPagare;
     }
+    
+    
+    private void Syso() {
+		// TODO Auto-generated method stub
+
+	}
 }
