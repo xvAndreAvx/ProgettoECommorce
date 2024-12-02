@@ -18,10 +18,7 @@ public class UtenteService implements UtenteServiceRemote {
     
     @PersistenceContext(unitName = "MySqlDS") 
     private EntityManager entityManager;
-
-    //Roberto è brutto
-    
-    
+        
     
     /**
      * Default constructor. 
