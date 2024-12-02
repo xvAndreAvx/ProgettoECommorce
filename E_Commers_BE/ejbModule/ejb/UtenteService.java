@@ -15,31 +15,43 @@ import entity.Utente;
 @Stateless
 @LocalBean
 public class UtenteService implements UtenteServiceRemote {
-    
-    @PersistenceContext(unitName = "MySqlDS") 
+
+    @PersistenceContext(unitName = "MySqlDS")
     private EntityManager entityManager;
-        
-    
+
     /**
-     * Default constructor. 
+     * Default constructor.
      */
     public UtenteService() {
     }
 
     @Override
     public void insert(Utente u) {
-        entityManager.persist(u);
+        try {
+            entityManager.persist(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Utente update(Utente u) {
-        return entityManager.merge(u);
+        try {
+            return entityManager.merge(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void delete(Utente u) {
-        u = entityManager.merge(u);
-        entityManager.remove(u);
+        try {
+            u = entityManager.merge(u);
+            entityManager.remove(u);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -51,5 +63,4 @@ public class UtenteService implements UtenteServiceRemote {
     public Utente findById(Long id) {
         return entityManager.find(Utente.class, id);
     }
-
 }
