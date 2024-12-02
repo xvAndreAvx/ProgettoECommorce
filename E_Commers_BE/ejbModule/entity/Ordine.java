@@ -78,5 +78,5 @@ public class Ordine implements Serializable {
         this.totaleDaPagare = totaleDaPagare;
     }
     
-  
+    public void ciao () {};
 }
