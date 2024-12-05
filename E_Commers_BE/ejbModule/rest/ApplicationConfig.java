@@ -8,6 +8,9 @@ import javax.ws.rs.core.Application;
 
 import org.jboss.resteasy.plugins.interceptors.CorsFilter;
 
+import ControllerREST.ProdottoController;
+import ControllerREST.UtenteController;
+
 
 @ApplicationPath("/api")
 public class ApplicationConfig  extends Application {
@@ -17,9 +20,9 @@ public class ApplicationConfig  extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> ret = new HashSet<>();
-//		ret.add(CorsFilter.class);
-//		ret.add(HelloController.class);
-//		ret.add(ProdottoController.class);
+		ret.add(CorsFilter.class);
+		ret.add(ProdottoController.class);
+		ret.add(UtenteController.class);
 		return ret;
 	}
 

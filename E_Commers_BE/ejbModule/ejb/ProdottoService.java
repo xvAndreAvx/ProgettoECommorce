@@ -18,12 +18,12 @@ import entity.Utente;
 @LocalBean
 public class ProdottoService implements ProdottoServiceRemote {
 
-	@PersistenceContext(unitName = "MySqlDS")
+	@PersistenceContext(unitName = "exolab2")
 	private EntityManager entityManager;
 
-	private ProdottoService instance = null;
+	private static ProdottoService instance = null;
 
-	public ProdottoService getInstance() {
+	public static ProdottoService getInstance() {
 
 		if (instance == null) {
 			ProdottoService instance = new ProdottoService();
@@ -49,7 +49,7 @@ public class ProdottoService implements ProdottoServiceRemote {
 		} catch (Exception e) {
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();
-		}finally {
+		} finally {
 			entityManager.close();
 		}
 	}
@@ -80,7 +80,7 @@ public class ProdottoService implements ProdottoServiceRemote {
 			p = entityManager.merge(p);
 			entityManager.remove(p);
 			entityManager.getTransaction().commit();
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();
 		} finally {
@@ -94,9 +94,10 @@ public class ProdottoService implements ProdottoServiceRemote {
 	public List<Prodotto> findAll() {
 		try {
 			entityManager.getTransaction().begin();
-			List<Prodotto> prodotti = entityManager.createQuery("SELECT p FROM Prodotto p", Prodotto.class).getResultList();
+			List<Prodotto> prodotti = entityManager.createQuery("SELECT p FROM Prodotto p", Prodotto.class)
+					.getResultList();
 			return prodotti;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();
 		} finally {
@@ -112,7 +113,7 @@ public class ProdottoService implements ProdottoServiceRemote {
 			entityManager.getTransaction().begin();
 			Prodotto prodotto = entityManager.find(Prodotto.class, id);
 			return prodotto;
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			entityManager.getTransaction().rollback();
 		} finally {
